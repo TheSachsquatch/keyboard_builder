@@ -1,0 +1,35 @@
+<div>
+    {{search_type}}
+    <button *ngIf="search==false" (click) = "setSearch()" >
+        <ng-icon name = "HeroChevronDown" class = "text-3xl btn pt-1"> </ng-icon>
+    </button>
+    <button *ngIf="search==true" (click) = "setSearch()">
+       <ng-icon  name = "HeroChevronUp" class = "text-3xl btn pt-1"> </ng-icon>
+    </button>
+    <div class = "text-xl ">
+        {{selected['title']}}&nbsp;
+        <p *ngIf="selected['price']!='$0'">
+            {{selected['price']}}
+        </p>
+        <img srcset = "{{selected['img']}}" class = "max-h-40">
+    </div>
+    <form *ngIf="search==true">
+        <div class = "flex flex-row">
+            <input #search_query type = "text" id = "query" class = "w-48 bg-slate-200 rounded-xl py-2 px-2 mt-2 rounded-r-none outline-none" (input) = "getSearchItems(search_query.value)">
+            <button class = " bg-slate-200 rounded-xl rounded-l-none mt-2 btn">
+                <ng-icon name = "HeroSearchCircle" class = "text-4xl mt-1"></ng-icon>
+            </button>
+        </div>
+        <ul *ngFor="let entry of search_ary" class = "text-xl">
+            <div class = "flex flex-row">
+                <button class = "hover:text-2xl" (click) = "setSelected(entry)" type = "button">
+                    {{entry['title']}}&nbsp;{{entry['price']}}&nbsp;
+                    <a href = "{{entry['link']}}" target="_blank" class = "hover:text-gray-500">
+                        {{entry['vendor']}}
+                    </a>
+                <img srcset = "{{entry['img']}}" loading = "lazy" class = "h-32 mx-2">
+                </button>
+            </div>
+        </ul>
+    </form>
+</div>

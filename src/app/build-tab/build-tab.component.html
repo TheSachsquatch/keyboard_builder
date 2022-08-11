@@ -1,0 +1,76 @@
+<header> </header>
+<div class = "mx-48 mt-10 relative top-0 mb-20">
+    <div class = "text-4xl flex flex-row gap-2 mb-3" *ngIf = "current== true">
+        <button class = "btn-log" (click) = "stopEdit()">
+            <ng-icon name = "HeroXCircle"> </ng-icon>
+        </button>
+        editing:&nbsp;{{oldName}}
+    </div>
+    <div class = "flex flex-row">
+        <div class= "pt-2 text-3xl" *ngIf = "editName==false">
+            {{name}}
+        </div>
+        <button class = "btn-log ml-2" (click) = "editName = true" *ngIf = "editName==false">
+            <ng-icon name="HeroPencilAlt" class = "text-3xl"> </ng-icon>
+        </button>
+        <div *ngIf = "editName==true" >
+            <input #nameVal class = "text-3xl w-56 h-10" value = {{name}}>
+            <button class = "btn-log ml-2" (click) = "setName(nameVal.value)">
+                <ng-icon name = "HeroSave" class = "text-3xl"></ng-icon>
+            </button>
+        </div>
+    </div>
+    <div class = "flex flex-col text-3xl ml-3 gap-2">
+        <div class = "flex flex-row gap-2">
+            <app-search search_type="switches" [(selected)] = switchSelected> </app-search>
+            <input #switchNum class = "text-3xl w-14 h-10 pb-2 border-l-2 border-l-black pl-2" value = {{1}} (keyup) = "setNum($event)">
+        </div>
+        <div>
+            <app-search search_type="pcb" [(selected)] = pcbSelected> </app-search>
+        </div>
+        <div>
+            <app-search search_type="plate" [(selected)] = plateSelected> </app-search>
+        </div>
+        <div>
+            <app-search search_type="cases" [(selected)] = caseSelected > </app-search>
+        </div>
+        <div>
+            <app-search search_type="keycaps" [(selected)] = keycapsSelected> </app-search>
+        </div>
+        <div>
+            <app-search search_type="misc" [(selected)] = miscSelected> </app-search>
+        </div>
+    </div>
+    <div class = "text-3xl mt-10">
+        total: ${{calculateTotal()}}
+    </div>
+    <div>
+        <button class= "mt-5 btn-log text-3xl" *ngIf = "user.getUser()!==''" (click) = "saveBuild()">
+            save build <br>
+        </button>
+    </div>
+    <div class = "mt-5 text-3xl" *ngIf = "user.getUser()==''">
+        please login to save
+    </div>
+    <div class = "bg-slate-200 px-3 py-3 rounded-xl mt-2 text-xl font-semibold inline-block" *ngIf = "overwritePrompt == true">
+        a build with this name already exists. <br> would you like to overwrite?
+        <div class = "mt-2 flex flex-row">
+            <button class = "btn-log mr-2" (click)= "editBuild()">
+                yes
+            </button>
+            <button class = "btn-log" (click) = "overwritePrompt = false">
+                no
+            </button>
+        </div>
+    </div>
+    <div class = "w-20 h-20 relative" *ngIf = "loading==true">
+        <div class="smt-spinner-circle">
+            <div class="smt-spinner"></div>
+            <div class="smt-spinner-inner-circle"></div>
+         </div>
+    </div>
+    <div class = "mt-1 text-xl ml-2 px-2 py-3 rounded-full bg-slate-100 text-slate-800 inline-block" *ngIf = "message!==''">
+        {{message}}
+    </div>
+</div>
+

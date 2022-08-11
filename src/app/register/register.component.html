@@ -1,0 +1,35 @@
+<div class = "shadow-xl bg-slate-100 align-middle py-10 px-10  w-1/3 mx-auto">
+    <div class = "text-3xl text-center font-semibold flex flex-row gap-2">
+        <a routerLink = "/">
+            <ng-icon name = "HeroArrowCircleLeft" class = "text-2xl hover:text-gray-500 pt-1"> </ng-icon>
+        </a>
+        <div>
+            register
+        </div>  
+    </div>
+    <div class = "mt-5">
+        <form class = "flex flex-col gap-5">
+            <input #inp_user type = "text" id= "username" placeholder = "username" class = "px-3 my-2 py-3 text-2xl rounded-3xl">
+            <input #inp_email type = "email" id = "email" placeholder = "email" class = "px-3 my-2 py-3 text-2xl rounded-3xl">
+            <input #inp_pass type = "password" id = "password" placeholder = "password" class = "px-3 my-2 py-3 text-2xl rounded-3xl">
+        </form>
+    </div>
+    <div class = "mt-5 text-2xl border-b-2 border-b-gray-400 pb-5">
+        already have an account?
+        <a class = "text-2xl mt-2 bg-slate-200 rounded-3xl px-3 py-1 hover:bg-slate-300" routerLink = "/" (click) ="this.loginChange.emit(true)">
+            login
+        </a>
+    </div>
+    <button class = "text-3xl rounded-3xl px-3 py-2 bg-slate-800 mt-5 text-white hover:bg-black" (click) = "signup(inp_email.value, inp_user.value, inp_pass.value)">
+        sign up
+    </button>
+    <div class = "text-xl text-red-500 font-semibold my-4" *ngIf = "userExists==true">
+        user already exists, please enter a different username/email
+    </div>
+    <div *ngIf = "user!==''" class = "text-xl text-green-300 my-4" >
+        signed up successfully
+    </div>
+</div>
+
+
+<router-outlet> </router-outlet>

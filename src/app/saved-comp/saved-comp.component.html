@@ -1,0 +1,21 @@
+<div>
+    <div *ngIf = "build[type]['title']!= 'please select element'">
+        <a class = "hover:text-gray-500" [attr.href] = "build[type]['link']" target= "_blank">
+            <div class = "font-semibold">
+                {{type}}
+            </div>
+            {{build[type]['title']}}
+            <img class = "max-h-32" srcset = "{{build[type]['img']}}">
+        </a>
+    </div>
+    <div *ngIf = "build[type]['title']== 'please select element'">
+        <div>
+            <div class = "font-semibold">
+                {{type}}
+            </div>
+            {{build[type]['title']}}
+            <img class = "max-h-32" srcset = "{{build[type]['img']}}">
+        </div>
+    </div>
+    
+</div>
